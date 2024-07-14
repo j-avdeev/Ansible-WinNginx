@@ -1,0 +1,15 @@
+---
+- name: Generate Self-Signed Certificates
+  hosts: localhost
+  tasks:
+    - name: Generate root CA certificate
+      command: openssl req -x509 -newkey rsa:4096 -keyout ca-key.pem -out ca-cert.pem -days 365 -nodes -subj "/CN=My Root CA"
+
+    - name: Generate server private key
+      command: openssl genrsa -out server-key.pem 4096
+
+    - name: Generate server certificate signing request (CSR)
+      command: openssl req -new -key server-key.pem -out server.csr -subj "/CN=localhost"
+
+    - name: Sign server certificate with root CA
+      command: openssl x509 -req -in server.csr -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -out server-cert.pem -days 365

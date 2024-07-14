@@ -1,0 +1,21 @@
+---
+- name: Setup firewall rules for Nginx
+  hosts: windows
+  tasks:
+    - name: Allow HTTP traffic
+      win_firewall_rule:
+        name: Allow HTTP
+        enable: yes
+        direction: in
+        action: allow
+        protocol: TCP
+        localport: 80
+
+    - name: Allow HTTPS traffic
+      win_firewall_rule:
+        name: Allow HTTPS
+        enable: yes
+        direction: in
+        action: allow
+        protocol: TCP
+        localport: 443

@@ -1,0 +1,27 @@
+---
+- name: Configure Nginx to work over HTTPS
+  hosts: windows
+  tasks:
+    - name: Ensure certificate directory exists
+      win_file:
+        path: C:/nginx/conf/certs
+        state: directory
+
+    - name: Copy certificates to the Windows host
+      win_copy:
+        src: "{{ item }}"
+        dest: C:\nginx\conf\certs\{{ item }}
+      with_items:
+        - ca-cert.pem
+        - server-cert.pem
+        - server-key.pem
+
+    - name: Copy Nginx configuration
+      win_template:
+        src: ../templates/nginx.conf.j2
+        dest: C:\nginx\conf\nginx.conf
+
+    - name: Restart Nginx service
+      win_service:
+        name: nginx
+        state: restarted
