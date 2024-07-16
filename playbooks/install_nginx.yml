@@ -30,3 +30,12 @@
         name: nginx
         start_mode: auto
         state: started
+    - name: Show ansible_user
+      debug:
+        msg: "ansible_user: {{ ansible_user }}"
+    - name: Show ansible_password
+      debug:
+        msg: "ansible_password: {{ ansible_password }}"
+      vars:
+        ansible_user: "{{ ansible_user }}"
+        ansible_password: "{{ ansible_password }}"

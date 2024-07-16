@@ -1,0 +1,11 @@
+---
+- name: Debug Ansible Variables
+  hosts: windows
+  gather_facts: no
+  tasks:
+    - name: Show ansible_user
+      debug:
+        msg: "ansible_user: {{ ansible_user }}"
+    - name: Show ansible_password
+      debug:
+        msg: "ansible_password: {{ ansible_password }}"
