@@ -1,6 +1,8 @@
 ---
 - name: Install and configure Nginx as a service
   hosts: windows
+  vars_files:
+    - vars/secrets.yml
   tasks:
     - name: Download Nginx
       win_get_url:
@@ -24,18 +26,12 @@
 
     - name: Install Nginx service
       win_command: C:\nginx\nginx-service.exe install
+      args:
+        creates: C:\\nginx\\nginx-service.exe
 
     - name: Start Nginx service
       win_service:
         name: nginx
+        path: C:\\nginx\\nginx-service.exe
         start_mode: auto
         state: started
-    - name: Show ansible_user
-      debug:
-        msg: "ansible_user: {{ ansible_user }}"
-    - name: Show ansible_password
-      debug:
-        msg: "ansible_password: {{ ansible_password }}"
-      vars:
-        ansible_user: "{{ ansible_user }}"
-        ansible_password: "{{ ansible_password }}"

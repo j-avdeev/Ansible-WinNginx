@@ -1,0 +1,18 @@
+---
+- name: Check if Nginx is running
+  hosts: localhost  # Assuming you are running this check locally on the Ansible control node
+  gather_facts: no  # We don't need to gather facts for this specific check
+
+  tasks:
+    - name: Perform HTTP request to check Nginx
+      uri:
+        url: "https://192.168.0.234/"
+        method: GET
+        status_code: 200
+        validate_certs: no
+      register: nginx_check
+      ignore_errors: yes  # Ignore errors to handle cases where Nginx might not be running yet
+
+    - name: Display Nginx status
+      debug:
+        msg: "Nginx is {{ 'running' if nginx_check.status == 200 else 'not running' }}"
