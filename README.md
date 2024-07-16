@@ -14,7 +14,7 @@ to test \
 ``$ ansible-playbook -i hosts.ini --ask-vault-pass ./playbooks/nginx_check.yml`` 
 #### Full Task Description
 
-Test Assignment: Setting Up a Web Server on Windows Using Ansible
+Test Assignment: Setting Up a Web Server on Windows Using Ansible \
 Goal: \
 Configure an Nginx web server on a Windows host using Ansible, including generating self-signed certificates, installing the necessary certificates on the system, configuring Nginx to work over HTTPS, and ensuring secrets management using Ansible Vault. \
 Steps:
@@ -41,3 +41,6 @@ This task ensures a secure and automated setup of a web server with proper manag
 ``winrm get winrm/config/Service``
 * Check if WinRM + hosts.ini are correct \
 ``ansible -i hosts.ini -m win_ping DESKTOP-P8D82BI -u Administrator --ask-pass``
+* Remove nginx service \
+``PS Stop-Service -Name nginx``
+``PS sc.exe delete nginx``

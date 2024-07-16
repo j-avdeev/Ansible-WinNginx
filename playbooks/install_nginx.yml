@@ -27,11 +27,11 @@
     - name: Install Nginx service
       win_command: C:\nginx\nginx-service.exe install
       args:
-        creates: C:\\nginx\\nginx-service.exe
+        creates: C:\nginx\nginx-service.exe
 
     - name: Start Nginx service
       win_service:
         name: nginx
-        path: C:\\nginx\\nginx-service.exe
+        path: C:\nginx\nginx-service.exe
         start_mode: auto
         state: started
