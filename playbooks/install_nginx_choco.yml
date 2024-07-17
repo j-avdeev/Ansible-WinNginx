@@ -5,13 +5,9 @@
     - name: Install Nginx using Chocolatey
       win_chocolatey:
         name: nginx
+        package_params:
+        - '/installLocation:C:\tools'
         state: present
-
-    - name: Copy custom nginx configuration
-      ansible.builtin.copy:
-        src: ../files/nginx.conf
-        dest: C:\nginx\conf\nginx.conf
-      notify: Restart Nginx Service
 
   handlers:
     - name: Restart Nginx Service

@@ -7,7 +7,7 @@
 #### Run 
 ``$ cd ansible-webserver-setup`` \
 ``$ ansible-playbook -i hosts.ini --ask-vault-pass ./playbooks/generate_certs.yml`` \
-``$ ansible-playbook -i hosts.ini --ask-vault-pass ./playbooks/install_nginx.yml`` \
+``$ ansible-playbook -i hosts.ini --ask-vault-pass ./playbooks/install_nginx_choco.yml`` \
 ``$ ansible-playbook -i hosts.ini --ask-vault-pass ./playbooks/configure_nginx.yml`` \
 ``$ ansible-playbook -i hosts.ini --ask-vault-pass ./playbooks/setup_firewall.yml`` \
 to test \

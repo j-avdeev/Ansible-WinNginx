@@ -4,13 +4,13 @@
   tasks:
     - name: Ensure certificate directory exists
       win_file:
-        path: C:/nginx/conf/certs
+        path: C:\tools\nginx-1.27.0\conf\certs
         state: directory
 
     - name: Copy certificates to the Windows host
       win_copy:
         src: "{{ item }}"
-        dest: C:\nginx\conf\certs\{{ item }}
+        dest: C:\tools\nginx-1.27.0\conf\certs\{{ item }}
       with_items:
         - ca-cert.pem
         - server-cert.pem
@@ -19,7 +19,7 @@
     - name: Copy Nginx configuration
       win_template:
         src: ../templates/nginx.conf.j2
-        dest: C:\nginx\conf\nginx.conf
+        dest: C:\tools\nginx-1.27.0\conf\nginx.conf
 
     - name: Restart Nginx service
       win_service:
