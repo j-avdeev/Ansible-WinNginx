@@ -1,6 +1,8 @@
 ---
 - name: Install and configure Nginx on Windows
   hosts: windows
+  vars_files:
+    - ../vars/credentials.yml
   tasks:
     - name: Install Nginx using Chocolatey
       win_chocolatey:

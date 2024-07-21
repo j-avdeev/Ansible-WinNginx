@@ -4,14 +4,17 @@
 #### Prerequisites
 * Ansible Control node
 * Windows-machine accessbile from Ansible Control node by WinRM
+* Create ``credentials.yml`` file
+``ansible-vault create credentials.yml``, then insert variables ``ansible_user: <username>`` and ``ansible_password: <password>``.
 #### Run 
 ``$ cd ansible-webserver-setup`` \
-``$ ansible-playbook -i hosts.ini --ask-vault-pass ./playbooks/generate_certs.yml`` \
-``$ ansible-playbook -i hosts.ini --ask-vault-pass ./playbooks/install_nginx_choco.yml`` \
-``$ ansible-playbook -i hosts.ini --ask-vault-pass ./playbooks/configure_nginx.yml`` \
-``$ ansible-playbook -i hosts.ini --ask-vault-pass ./playbooks/setup_firewall.yml`` \
+``$ ansible-playbook -i hosts.ini --ask-vault-pass --vault-id credentials.yml ./playbooks/generate_certs.yml`` \
+``$ ansible-playbook -i hosts.ini --ask-vault-pass --vault-id credentials.yml ./playbooks/install_nginx_choco.yml`` \
+``$ ansible-playbook -i hosts.ini --ask-vault-pass --vault-id credentials.yml ./playbooks/configure_nginx.yml`` \
+``$ ansible-playbook -i hosts.ini --ask-vault-pass --vault-id credentials.yml ./playbooks/setup_firewall.yml`` \
 to test \
-``$ ansible-playbook -i hosts.ini --ask-vault-pass ./playbooks/nginx_check.yml`` 
+``$ ansible-playbook -i hosts.ini --ask-vault-pass --vault-id credentials.yml ./playbooks/nginx_check.yml`` \
+
 #### Full Task Description
 
 Test Assignment: Setting Up a Web Server on Windows Using Ansible \
@@ -42,5 +45,5 @@ This task ensures a secure and automated setup of a web server with proper manag
 * Check if WinRM + hosts.ini are correct \
 ``ansible -i hosts.ini -m win_ping DESKTOP-P8D82BI -u Administrator --ask-pass``
 * Remove nginx service \
-``PS Stop-Service -Name nginx``
+``PS Stop-Service -Name nginx`` \
 ``PS sc.exe delete nginx``

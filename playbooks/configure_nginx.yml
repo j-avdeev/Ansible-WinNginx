@@ -1,6 +1,8 @@
 ---
 - name: Configure Nginx to work over HTTPS
   hosts: windows
+  vars_files:
+    - ../vars/credentials.yml
   tasks:
     - name: Ensure certificate directory exists
       win_file:

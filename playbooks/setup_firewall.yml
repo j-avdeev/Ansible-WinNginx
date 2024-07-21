@@ -1,6 +1,8 @@
 ---
 - name: Setup firewall rules for Nginx
   hosts: windows
+  vars_files:
+    - ../vars/credentials.yml
   tasks:
     - name: Allow HTTP traffic
       win_firewall_rule:
